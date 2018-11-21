@@ -1,0 +1,201 @@
+\documentclass[11pt, a4paper, fleqn]{article}
+\usepackage[left=0.5in, top=0.5in, bottom=0.5in, right=0.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{setspace}
+
+\begin{document}
+\title{Homework Assignment 3\\
+Harshita Agarwala}
+\maketitle
+\section{Problem 1}
+Let the function be denoted by g($\theta$)
+\begin{equation*}
+g(\theta)=\theta^t (1-\theta)^h
+\end{equation*}
+Differentitating w.r.t to $\theta$ we get the first derivative
+\begin{equation*}
+g'(\theta)=t \theta^\text{t-1} (1-\theta)^h - h \theta^t (1 - \theta)^\text{h-1}
+\end{equation*}
+Differentitating w.r.t to $\theta$ again, we get the second derivate:
+\begin{equation*}
+g''(\theta)=t(t-1) \theta^\text{t-2} (1-\theta)^h -2th \theta^\text{t-1} (1 - \theta)^\text{h-1} + h(h-1) \theta^t (1 - \theta)^\text{h-2}
+\end{equation*}
+\\
+Now we let f($\theta$)=log g($\theta$) and find the 1st and 2nd derivatives
+\begin{equation*}
+f(\theta) = log (g(\theta)) = \text{t log($\theta$) + h log(1-$\theta$)}
+\end{equation*}
+\begin{equation*}
+f'(\theta) = 
+\frac{\substack{t}}{\substack{\theta}} - \frac{\substack{h}}{\substack{1 - \theta}} 
+\end{equation*}
+\begin{equation*}
+\text{and  }
+f''(\theta) = 
+\frac{\substack{h}}{\substack{(1 - \theta)^2}} - \frac{\substack{t}}{\substack{\theta^2}}
+\end{equation*}
+
+
+\section{Problem 2}
+We first find critical points on f($\theta$) = log g($\theta$) by equating f'($\theta$) to 0
+\begin{equation*}
+\Rightarrow \frac{\substack{t}}{\substack{\theta}} - \frac{\substack{h}}{\substack{1 - \theta}} = 0
+\end{equation*}
+\begin{equation*}
+\Rightarrow \frac{\substack{t - (t+h)\theta}}{\substack{\theta (1-\theta}} = 0
+\end{equation*}
+\begin{equation*}
+\Rightarrow t-(t+h)\theta = 0
+\end{equation*}
+\begin{equation}
+\Rightarrow \theta = \frac{\substack{t}}{\substack{t+h}}
+\end{equation}
+We substitute the value of $\theta$ in f''($\theta$) with that in equation (1) and get
+\begin{equation*}
+f''(\theta)= \frac{\substack{(t+h)^2}}{\substack{h}} - \frac{\substack{(t+h)^2}}{\substack{t}} = 
+\frac{\substack{t-h}}{\substack{th}} (t+h)^2 < 0          \text{     if h $>$ t}
+\end{equation*}
+Again replacing the value of $\theta$ in g'($\theta$) with that in equation (1) we get
+\begin{equation*}
+g'(\theta)=t \Big[\frac{\substack{t}}{\substack{t+h}}\Big]^\text{t-1} \Big [ 1 - \frac{\substack{t}}{\substack{t+h}} \Big]^h
+- h \Big[\frac{\substack{t}}{\substack{t+h}}\Big]^\text{t} \Big [ 1 - \frac{\substack{t}}{\substack{t+h}} \Big]^\text{h-1}
+\end{equation*}
+\begin{equation}
+g'(\theta)=\frac{\substack{t^t h^h}}{\substack{(t+h)^\text{t+h-1}}} - \frac{\substack{t^t h^h}}{\substack{(t+h)^\text{t+h-1}}} = 0
+\end{equation}
+Hence, the critical points are same.\\
+Now we find if it is a maximum or not.
+\newpage
+Now g''(($\theta$) is given by:
+\begin{equation*}
+g''(\theta)=t(t-1) \theta^\text{t-2} (1-\theta)^h -2th \theta^\text{t-1} (1 - \theta)^\text{h-1} + h(h-1) \theta^t (1 - \theta)^\text{h-2}
+\end{equation*}
+\begin{equation*}
+g''\Big(\frac{\substack{t}}{\substack{t+h}}\Big)=
+t(t-1) \Big(\frac{\substack{t}}{\substack{t+h}}\Big)^\text{t-2} \Big(1-\frac{\substack{t}}{\substack{t+h}}\Big)^h 
+-2th \Big(\frac{\substack{t}}{\substack{t+h}}\Big)^\text{t-1} \Big(1-\frac{\substack{t}}{\substack{t+h}}\Big)^\text{h-1} 
++ h(h-1) \Big(\frac{\substack{t}}{\substack{t+h}}\Big)^t \Big(1-\frac{\substack{t}}{\substack{t+h}}\Big)^\text{h-2}
+\end{equation*}
+On solving further we get,
+\begin{equation}
+g''\Big(\frac{\substack{t}}{\substack{t+h}}\Big)=
+- \frac{\substack{t^\text{t-1} h^\text{h-1}}}{\substack{(t+h)^\text{t+h-1}}} < 0 \text{  as t,h $\in$ $\mathbb{N}$}
+\end{equation}
+Therefore, log function retains the critical points of the main function
+
+\section{Problem 3}
+We know that $\theta_\text{MAP}$ is the maximum of the p($\theta$ = x $|$ D) and is given by':
+\begin{equation*}
+\theta_\text{MAP} =  \frac{\substack{N_T + a -1}}{\substack{N + a+b-1}} 
+\text{   and   } 
+\theta_\text{MLE} =  \frac{\substack{N_T}}{\substack{N}}
+\end{equation*}
+If $\theta_\text{MAP}$ = $\theta_\text{MLE}$ then a=b=1\\
+This means that the prior distribution is uniform i.e there exists a prior p($\theta$) such that the result holds. Also, we know that such a prior will always exist.
+\\Hence, it is true that $\theta_\text{MLE}$ is a special case of $\theta_\text{MAP}$
+
+\section{Problem 4}
+\begin{equation*}
+\text{Now } \theta_\text{MLE} =  \frac{\substack{m}}{\substack{m+l}}
+\end{equation*}
+\begin{equation*}
+\text{and } E_\text{PR}[\theta|a,b] =  \frac{\substack{a}}{\substack{a+b}}
+\end{equation*}
+The consequent posterior distribution is given by the Beta distribution Beta(x $|$ a+m, b+l) and the mean of this is:
+\begin{equation*}
+E_\text{PS}[X] =  \frac{\substack{a+m}}{\substack{a+b+m+l}} = 
+\frac{\substack{a}}{\substack{a+b+m+l}} + \frac{\substack{m}}{\substack{a+b+m+l}}
+\end{equation*}
+\begin{equation*}
+\text{Let   } 0 \leq \lambda \leq 1 \text{   be   }
+\frac{\substack{a+b}}{\substack{a+b+m+l}}
+\end{equation*}
+Then we get, 
+\begin{equation}
+\lambda E_\text{PR} = \Big[\frac{\substack{a+b}}{\substack{a+b+m+l}}\Big]  \frac{\substack{a}}{\substack{a+b}} 
+= \frac{\substack{a}}{\substack{a+b+m+l}}
+\end{equation}
+
+\begin{equation}
+\text{and  } (1-\lambda) \theta_\text{MLE} = \Big[\frac{\substack{m+l}}{\substack{a+b+m+l}}\Big]  \frac{\substack{m}}{\substack{m+l}} 
+= \frac{\substack{m}}{\substack{a+b+m+l}}
+\end{equation}
+On adding equation (4) and (5) we have, 
+\begin{equation*}
+ \lambda E_\text{PR} + (1-\lambda)\theta_\text{MLE} = E_\text{PS}
+\end{equation*}
+\newpage
+\section{Problem 5}
+The Poisson Distribution of X is given by
+\begin{equation*}
+P(X=k | \lambda) = \frac{\substack{\lambda^k e^\text{-$\lambda$}}}{\substack{k!}}
+\end{equation*}
+Now, for n i.i.d samples for X the probability is given by:
+\begin{equation*}
+P(D | \lambda) = \prod_{i=1}^{n}{\frac{\substack{\lambda^{k_i} e^\text{-$\lambda$}}}{\substack{k_i!}}}
+\end{equation*}
+\begin{equation}
+\Rightarrow P(D | \lambda) =e^\text{-n$\lambda$} \prod_{i=1}^{n}\frac{\substack{\lambda^{k_i}}}{\substack{k_i!}}
+\end{equation}
+Taking log of equation (6) and denoting it by f($\lambda$) we have,
+
+\begin{equation*}
+f(\lambda) =-n\lambda + \Big(\sum_{i=1}^{n}{k_i}\Big) \log\lambda + \log\Big(\sum_{i=1}^{n}{k_i}\Big)
+\end{equation*}
+Differentiating w.r.t to $\lambda$ and equating to 0 we get
+\begin{equation*}
+f'(\lambda) =-n + \frac{\substack{\sum_{i=1}^{n}{k_i}}}{\substack{\lambda}} = 0
+\end{equation*}
+\begin{equation*}
+\Rightarrow \lambda = \frac{\substack{\sum_{i=1}^{n}{k_i}}}{\substack{n}}
+\end{equation*}
+\begin{equation*}
+\text{Therefore we have  }
+\theta_\text{MLE} = \frac{\substack{\sum_{i=1}^{n}{k_i}}}{\substack{n}}
+\end{equation*}
+\\
+Now we let the prior have a Gamma distribution with constants $\alpha$ and $\beta$
+\begin{equation*}
+P(\lambda|\alpha,\beta) = \frac{\substack{\beta^\alpha }}{\substack{\Gamma{\alpha}}} \lambda^\text{$\alpha$ -1} e^\text{$-\lambda\beta$}
+\end{equation*}
+Now the posterior distribution is given by:
+
+\begin{equation*}
+P(\lambda|D) = \frac{\substack{P(D|\lambda).P(\lambda) }}{\substack{P(D)}} 
+\end{equation*}
+On replacing values we get,
+
+\begin{equation*}
+P(\lambda|D) = \frac{\substack{1 }}{\substack{P(D)}} . 
+\frac{\substack{e^\text{-n$\lambda$} \lambda^\text{$\sum{k_i}$}}}{\substack{\prod{k_i}}} . 
+\frac{\substack{\beta^\alpha }}{\substack{\Gamma{\alpha}}} \lambda^\text{$\alpha$ -1} e^\text{$-\lambda\beta$}
+\end{equation*}
+\begin{equation*}
+\Rightarrow 
+P(\lambda|D) = c \Big[e^\text{(-n + $\beta$)$\lambda$}. \lambda^\text{($\alpha$ -1 + $\sum{k_i}$)}\Big]
+\text{  where c is a constant}
+\end{equation*}
+Again taking log of the above function we get,
+\begin{equation*}
+(-n + \beta)\lambda + (\alpha -1 + \sum{k_i}) \log \lambda
+\end{equation*}
+ On finding the derivative and equating it to 0 we get,
+
+\begin{equation*}
+\lambda=\frac{\substack{\alpha -1 + \sum{k_i}}}{\substack{(-n + \beta)}} = \theta_\text{MAP}
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

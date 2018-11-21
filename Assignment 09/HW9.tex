@@ -1,0 +1,78 @@
+\documentclass[10pt, a4paper, fleqn]{article}
+\usepackage[left=0.5in, top=0.5in, bottom=0.5in, right=0.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{setspace}
+
+\begin{document}
+\title{Machine Learning - Deep Learning: Assignment 9\\
+Harshita Agarwala}
+\maketitle
+\section{Problem 1}
+Basis functions are required in neural networks as they help in mapping the data set to a linearly separable space. It then becomes easier to find a hyperplane that would separate the data points.
+\section{Problem 2}
+We can show that tanh(x) can be written in terms of $\sigma(x)$
+\begin{eqnarray*}
+2\sigma(2x) -1 & = & \frac{2}{e^\text{$-2x$}+1} -1\\
+&=& \frac{2- e^\text{$-2x$} -1}{e^\text{$-2x$}+1}\\
+& = & \frac{1- e^\text{$-2x$}}{e^\text{$-2x$}+1}\\
+& = & \frac{e^\text{$2x$} -1}{e^\text{$2x$}+1}\\
+& = & \frac{e^x (e^x-e^\text{$-x$})}{e^x(e^x+ e^\text{$-x$})}\\
+& = & tanh(x)
+\end{eqnarray*}
+Therefore we can reproduce an equivalent network using tanh(x) activation function.
+\section{Problem 3}
+Now we know that $\tanh (x)=\frac{e^x - e^\text{$-x$}}{\substack{e^x + e^\text{$-x$}}}$\\
+Therefore derivative of tanh(x) is:
+\begin{eqnarray*}
+\frac{d}{dx}\tanh (x)&=& \frac{d}{dx}\frac{e^x - e^\text{$-x$}}{e^x + e^\text{$-x$}}\\
+&=& \frac{(e^x - e^\text{$-x$})(e^x + e^\text{$-x$})}{(e^x + e^\text{$-x$})^2}\\
+&=& \frac{(e^x + e^\text{$-x$})(e^x + e^\text{$-x$}) - (e^x - e^\text{$-x$})(e^x - e^\text{$-x$})}{(e^x + e^\text{$-x$})^2}\\
+&=& 1- \tanh(x)^2
+\end{eqnarray*}
+This property is useful as it simplifies the derivative and reduces computation. Already computed values can be reused.
+\section{Problem 4}
+The appropriate choice of the activation function would be tanh(x). This is because tanh(x) is a scaled sigmoid function. The output of a sigmoid function is between 0 and 1. However, the tanh(x) function rescales the values between -1 and 1.\\
+As shown in Problem 2, we can replace $f(x_i,w)$ with $(2f(2x_i,2w)) -1)$ in E(w)
+\section{Problem 5}
+\begin{eqnarray*}
+\begin{aligned}
+E(w) = \frac{1}{m} \sum\limits_{i=1}^{m}{l(y_i - wx_i)} - \frac{\lambda}{2}||w||^2\\
+\nabla E(w) = \frac{1}{m} \sum\limits_{i=1}^{m}{\nabla l(y_i - wx_i)} - \lambda w
+\end{aligned}
+\end{eqnarray*}
+\[
+\nabla l(y_i - wx_i) = 
+\begin{cases}
+-x_i(y_i - wx_i) & \text{if $|(y_i - wx_i)| < 1$}\\
+-x_i sgn(y_i - wx_i) & \text{otherwise}\\
+\end{cases}\]
+\section{Problem 6}
+We know that over-fitting of the training data set leads to higher erros in the test and validation data sets. Therefore, relating to the graph, we should stop updating at approximately 50th iteration. At this stage the slope of the error graph for the training data set reduces which means that with every iteration only a small improvement occurs in the training set. Hence this is not a general improvemment and therefore leads to over-fitting.
+\section{Problem 7}
+\begin{eqnarray*}
+a + \log \sum\limits_{i=1}^{N}{e^\text{$x_i -a$}}&=& a\log{e} + \log \sum\limits_{i=1}^{N}{e^\text{$x_i -a$}}\\
+&=& \log{e^a} + \sum\limits_{i=1}^{N}{e^\text{$x_i -a$}}\\
+&=& \log\Big[{e^a \sum\limits_{i=1}^{N}{e^\text{$x_i -a$}}}\Big]\\
+&=& \log \sum\limits_{i=1}^{N}{e^\text{$x_i -a$}. e^a}\\
+&=& \log \sum\limits_{i=1}^{N}{e^\text{$x_i$}}
+\end{eqnarray*}
+\section{Problem 8}
+For any arbitrary a, we can show that:
+\begin{equation*}
+\frac{e^\text{$x_i -a$}}{\sum_{i=1}^{N}{e^\text{$x_i-a$}}} \ \ = \ \ \frac{e^\text{$x_i -a$}}{\sum_{i=1}^{N}{e^\text{$x_i-a$}}} . \frac{e^a}{e^a} \ \ = \ \ \frac{e^\text{$x_i$}}{\sum_{i=1}^{N}{e^\text{$x_i$}}}
+\end{equation*}
+\section{Problem 9}
+\begin{eqnarray*}
+\begin{aligned}
+&-(y \log(\sigma(x)) + (1-y) \log(1-\sigma(x)))\\
+=&-\Big[y \log\Big(\frac{1}{1+e^\text{$-x$}}\Big) + (1-y) \log\Big(1-\frac{1}{1+e^\text{$-x$}}\Big)\Big]\\
+=& -\Big[-y \log(1+e^\text{$-x$}) + (1-y) \log\Big(\frac{e^\text{$-x$}}{1+e^x}\Big)\Big]\\
+=& -\Big[-y \log(1+e^\text{$-x$}) + \log(e^\text{$-x$}) - \log(1 + \text{$-x$}) -y \log(e^\text{$-x$}) + y \log(1 + e^\text{$-x$})\Big]\\
+=& -[-x - log(1 + e^\text{$-x$}) + xy]\\
+=&\ x + log(1 + e^\text{$-x$}) - xy
+\end{aligned}
+\end{eqnarray*}
+Now, as this is a cost function, we need to ensure that the value is positive. Therefore, we subsitute $x$ with $abs(x)$ in the logarithmic function and with $\max(x,0)$ in place of $x$\\ \\
+$x + log(1 + e^\text{$-x$}) - xy \ \sim \ \max(x,0) + log(1 + e^\text{$-abs(x)$}) - xy$
+\end{document}

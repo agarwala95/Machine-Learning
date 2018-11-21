@@ -1,0 +1,87 @@
+\documentclass[11pt, a4paper, fleqn]{article}
+\usepackage[left=0.5in, top=0.5in, bottom=0.5in, right=0.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{setspace}
+
+\begin{document}
+\title{Machine Learning: Assignment 5\\
+Harshita Agarwala}
+\maketitle
+\begin{singlespacing}
+\section{Problem 1}
+If we have CoX $\cap$ CoY $\neq \phi$ then $\exists$ atleast one point $\boldsymbol{t}$ $\in$ CoX and  $\boldsymbol{t}$ $\in$ CoY  
+\\
+$\Rightarrow$ $\exists$ $\alpha_i$s and $\beta_j$s such that
+\begin{equation}
+t = \sum_{i=1}^{N}{x_i \alpha_i}, \text{  } \alpha_i \geq 0 \text{  and  } \sum_{i=1}^{N}{\alpha_i} =1
+\ \ \ \ \text{and} \ \ \ \
+t = \sum_{j=1}^{M}{y_j \beta_j}, \text{  } \beta_j \geq 0 \text{  and  } \sum_{j=1}^{M}{\beta_j} =1
+\end{equation}
+If possible let there exist w and $w_o$  such that
+\begin{equation*}
+w^T x_i +w_o > 0  \  \forall \  i = 1, ... , N \text{  and   } w^T y_j + w_o < 0  \ \forall \ j = 1, ... , M
+\end{equation*}
+Now as  $\alpha_i$ $\geq$ 0 we have,
+\begin{equation*}
+\alpha_i(w^T x_i +w_o) \geq 0  \  \forall \  i = 1, ... , N 
+\end{equation*}
+Summing over all i we get,
+\begin{equation*}
+\sum{\alpha_i(w^T x_i +w_o)} > 0  \text{ as $ \sum_{i=1}^{N}{\alpha_i} =1 $}
+\end{equation*}
+\begin{equation}
+\Rightarrow w^T \sum{\alpha_i x_i} +w_o \sum{\alpha_i} > 0  \ \ 
+\Rightarrow w^T t +w_o > 0
+\end{equation}
+Similarly, we get
+\begin{equation}
+\sum{\beta_j(w^T y_j +w_o)} < 0 \ 
+\Rightarrow w^T \sum{\beta_j y_j} +w_o \sum{\beta_j} < 0  \ \ 
+\Rightarrow w^T t +w_o < 0
+\end{equation}
+Clearly, statements 2 and 3 contradict each other. Hence, there does not exist any w and $w_o$ such that the two sets are linearly separable.
+
+\section{Problem 2}
+We have to minimize the $E_w$(w) function i.e. equivalent to maximizing 
+\begin{equation*}
+\ln {\Big[\prod_{i=1}^{N}{\sigma(w^T x_i)^\text{$y_i$}(1 - \sigma(w^T x_i))^\text{1-$y_i$}}\Big] }
+\end{equation*}
+Now as $0 \leq \sigma(a) \leq 1 $, we would want the $\sigma(w^T x_i)$ and $(1 - \sigma(w^T x_i))$ to be 1.
+\begin{equation*}
+\text{for  } \sigma(w^T x_i) = \frac{\substack{1}}{\substack{exp(-w^T x_i) +1}} \rightarrow 1 
+\end{equation*}
+we will have $w \rightarrow \infty$ . Hence, we get
+\begin{equation}
+ \lim_{w\to\infty} \sigma(w^T x_i) = 1
+\end{equation}
+\begin{equation*}
+\text{Similarly for  } \ (1-  \sigma(w^T x_i)) = 1 - \frac{\substack{1}}{\substack{exp(-w^T x_i) +1}} \rightarrow 1 
+\end{equation*}
+we will have $w \rightarrow -\infty$ . Hence, we get
+\begin{equation}
+ \lim_{w\to -\infty} 1 - \sigma(w^T x_i) = 1
+\end{equation}
+Therefore, we have the required result. Also, to penalize the high magnitudes of w, we add an error term like in the ridge regression.
+\begin{equation*}
+E(w) = -\ln {\Big[\prod_{i=1}^{N}{\sigma(w^T x_i)^\text{$y_i$}(1 - \sigma(w^T x_i))^\text{1-$y_i$}}\Big] } + \lambda||w||^2_q
+\end{equation*}
+
+\section{Problem 3}
+We could use the basis function $\Phi(x_1,x_2) = \frac{x_2}{x_1}$ . This would make the circles transform to positive values and crosses to negative values.
+
+\section{Problem 4}
+The two points on the hyperplane are (0,5) and (2,0). As the data is two-dimensional, the hyperplane would be a line. Let the equation of the line be:
+\begin{equation*}
+w_0+w_1 x_1+w_2 x_2 =0 
+\end{equation*}
+On replacing the values (0,5) and (2,0) we get, 
+\begin{equation*}
+w_0 = -5w_2 \ \text{and} \ w_0 = -2w_1 \ \ \Rightarrow w_1 = \frac{5}{2}w_2
+\end{equation*}
+Taking $w_2$ = 1, the equation of the line is:
+\begin{equation*}
+-5 + \frac{5}{2} x_1+ x_2 =0 
+\end{equation*}
+\end{singlespacing}
+\end{document}

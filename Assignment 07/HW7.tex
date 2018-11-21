@@ -1,0 +1,80 @@
+\documentclass[10pt, a4paper, fleqn]{article}
+\usepackage[left=0.5in, top=0.5in, bottom=0.5in, right=0.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{setspace}
+
+\begin{document}
+\title{Machine Learning: Assignment 7\\
+Harshita Agarwala}
+\maketitle
+\section{Problem 1}
+The Langrangian is given by: $L(x_1,x_2,\alpha) = -(x_1 + x_2) + \alpha(x_1^2 + x_2^2 -1)$ \\
+The partial derivatives of L w.r.t. $x_1, x_2$ are:
+\begin{equation*}
+\frac{\partial L}{\partial x_1} = -1 + 2\alpha x_1 \ \ \text{and} \ \ \frac{\partial L}{\partial x_2} = -1 + 2\alpha x_2
+\end{equation*}
+Hence, the optimal values of $x_1, x_2$ is at $\frac{1}{\substack{2\alpha}}$ . Replacing this value in the Lagrangian, and then finding the maximum.
+\begin{equation*}
+L(x_1^*,x_2^*,\alpha) = -\Big[\frac{1}{\substack{2\alpha}} + \frac{1}{\substack{2\alpha}}\Big] + \alpha\Big[\frac{1}{\substack{4\alpha^2}} + \frac{1}{\substack{4\alpha^2}} -1\Big] \ \ 
+\Rightarrow L(\alpha) = \alpha - \frac{1}{\substack{2\alpha}}
+\end{equation*}
+Now the derivative of L w.r.t. $\alpha$ is $\nabla_\alpha L = -1 + \frac{1}{\substack{2\alpha^2}}$\\
+Equating $\nabla_\alpha L$ to 0, we have $\alpha^* = \frac{1}{\substack{\sqrt{2}}}$ \\
+As $x_1, x_2 = \frac{1}{\substack{2\alpha}}$. Therefore, $f_0$ reaches optimal at $x_1^* = \frac{1}{\substack{\sqrt{2}}}$  and $x_2^* = \frac{1}{\substack{\sqrt{2}}}$\\
+And the optimal value of $f_0$ is $-\sqrt{2}$
+\section{Problem 2}
+The comparison of SVM and Perceptron method is:
+\begin{itemize}
+\item Both Perceptron and SVM try to find a hyperplane that will linearly separate the data points. Perceptron method is a genralized method of SVM.
+\item Perceptron finds the hyperplane with minimal misclassified points that separates the data points without considering the distance between them. SVM tries to find a hyperplane that maximizes the distance (margin) between the data points or the support vectors.
+\item Perceptron assumes that the data set is linearly separable. However, SVM uses a kernel function for the same.
+\end{itemize}
+\section{Problem 3}
+To show that the duality gap is 0 in an SVM, we have to show that Slater's condition holds.\\
+Now, the SVM function is:\par
+\textbf{minimize}  \ \   $f_0(w,b) = \frac{1}{2}w^Tw$\par
+\textbf{subject to} $f_1(w,b) = y_i(w^Tx_i + b) -1 \geq 0$  for i = 1, ... , N
+\\ \\
+We can rewrite $f_1$ as
+\begin{equation*}
+-y_i(w^Tx_i + b) +1 \leq 0 \ \ 
+\Rightarrow -y_i w^Tx_i - y_i b +1 \leq 0
+\end{equation*}
+This is an affine function in two variables w,b and a constant 1. \\
+Hence, Slater's 2nd condition is satisfied. Therefore Duality gap is 0.
+\section{Problem 4}
+a)
+\\The dual function is: $g(\alpha) = \sum\limits_{i=1}^{N}{\alpha_i} - \frac{1}{2} \sum\limits_{i=1}^{N}\sum\limits_{j=1}^{N}{y_iy_j\alpha_i\alpha_jx_i^T x_j} $ \\
+Here,each $x_i$ is also a vector. To write it in the form of a quadratic function, we can write Q as:
+\[ Q = -
+\begin{bmatrix}
+y_1y_1x_1^Tx_1&y_1y_2 x_1^Tx_2&\cdots &y_1y_Nx_1^Tx_N \\
+y_2y_1x_2^Tx_1&y_2y_2x_2^Tx_2&\cdots &y_2y_Nx_2^Tx_N \\
+\vdots & \vdots & \ddots & \vdots\\
+y_Ny_1x_N^Tx_1&y_Ny_2x_N^Tx_2&\cdots &y_Ny_Nx_N^Tx_N
+\end{bmatrix}\]
+\[ Q = -
+\begin{bmatrix}
+y_1y_1&y_1y_2 &\cdots &y_1y_N\\
+y_2y_1&y_2y_2&\cdots &y_2y_N \\
+\vdots & \vdots & \ddots & \vdots\\
+y_Ny_1&y_Ny_2&\cdots &y_Ny_N
+\end{bmatrix}
+\odot
+\begin{bmatrix}
+x_1^Tx_1&x_1^Tx_2&\cdots &x_1^Tx_N \\
+x_2^Tx_1&x_2^Tx_2&\cdots &x_2^Tx_N \\
+\vdots & \vdots & \ddots & \vdots\\
+x_N^Tx_1&x_N^Tx_2&\cdots &x_N^Tx_N
+\end{bmatrix}\]
+We can take Y to be a N $\times$ 1 vector of $y_1, y_2, \cdots , y_N$ values. \\
+Similarly, we can take X to be 1 $\times$ N vector of vectors with $x_1,x_2, \cdots , x_N$ as values.\\ \\
+Then, Q can be written as: \ $Q = -(YY^T) \odot (X^T X)$
+\\
+\\
+b)\\
+Now, Q is negative semi-definite as $Q = -(YY^T) \odot (X^T X)$. Clearly, $(YY^T)$ and $(X^T X)$ are squared positive values. Hence, the negative sign in front of it makes Q a symmetric matrix with negative values which means it is negative semi-definite.\\ \\
+c)\\
+This is required as the objective is to maximize the dual function $g(\alpha)$ whose solution is equal to the minimum of the primal problem. Being negative semi-definite, it ensures that there is only one global maximum of the dual. Hence, one global minimum of the primal.
+\end{document}

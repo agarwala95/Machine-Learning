@@ -1,0 +1,104 @@
+\documentclass[11pt, a4paper, fleqn]{article}
+\usepackage[left=0.5in, top=0.5in, bottom=0.5in, right=0.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{setspace}
+
+\begin{document}
+\title{Homework Assignment 4\\
+Harshita Agarwala}
+\maketitle
+\section{Problem 1}
+The notebook solution attached at the end.
+
+\section{Problem 2}
+Adding a weighting factor $t_i$ to the datapoint ($x_i,y_i$) makes it:
+\begin{equation*}
+E_w(\omega) = \frac{\substack{1}}{\substack{2}} \sum_{i=1}^{N}{t_i [\omega^T \Phi(x_i) - y_i]^2}
+=  \frac{\substack{1}}{\substack{2}} (T^T\Phi \omega - T^T y)^T (T^T\Phi \omega - T^T y)
+\end{equation*}
+Here T is a N-dimensional vector with the values of $t_i$ \\
+Hence, we have
+\begin{equation*}
+ E_w(\omega) = \frac{\substack{1}}{\substack{2}} [\omega^T \Phi^T T T^T \Phi \omega - 2\omega^T \Phi^T T T^T y + y^T T T^T y ]
+\end{equation*}
+Taking gradient of $E_w(\omega)$ w.r.t $\omega$ and equating it to 0 to find minimum, we get:
+\begin{equation*}
+\Delta_w E_w = \Phi^T T T^T \Phi \omega - \Phi^T T T^T y = 0
+\end{equation*}
+\begin{equation*}
+\omega^* = (\Phi^T T T^T \Phi)^\text{-1} \Phi^T T T^T y
+\end{equation*}
+Each weighted scalar factor assigns an importance or weight to every datapoint. Hence, the weight for data points closer to the mean should be more and therefore the variance on the noise should reduce. Therefore more the variance of the noise, lesser the scalar factor and vice versa.\\
+Similarly, the data points that have exact copies, will have more weightage on the model. Hence, higher the scaling factor.
+\section{Problem 3}
+The augmented matrix $\Phi$ - (N+M) x M is of the form:
+\[\begin{bmatrix}
+\Phi_0(x_1)&\Phi_1(x_1)&\cdots &\Phi_M(x_1) \\
+\Phi_0(x_2)&\Phi_1(x_2)&\cdots &\Phi_M(x_2) \\
+\vdots & \vdots & \ddots & \vdots\\
+\Phi_0(x_N)&\Phi_1(x_N)&\cdots &\Phi_M(x_N)\\
+\sqrt{\lambda}&0&\cdots & 0\\
+0&\sqrt{\lambda}&\cdots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+0&0&\cdots &\sqrt{\lambda}
+\end{bmatrix}\]
+Similarly the vector y - (N+M) x 1 with M additional zeroes looks like:
+\[\begin{bmatrix}
+y_1&y_2&\cdots &y_N& 0&0&\cdots&0
+\end{bmatrix}\]
+\newpage
+Now, we know that $\omega^*$ for Least Squares and for Ridge is:
+\begin{equation*}
+\omega_\text{LS} = (\Phi^T \Phi)^\text{-1} \Phi^T y \text{  and } 
+\omega_R = (\lambda I_M + \Phi^T \Phi)^\text{-1} \Phi^T y 
+\end{equation*}
+For the augmented matrices, the $\omega_\text{LS}$ can be expanded to be written as 
+\begin{equation}
+\omega_\text{LS} =  (\lambda I_M + \Phi'^T \Phi')^\text{-1} \Phi^T y 
+\end{equation}
+where $\Phi'$ is the N x M matrix with out the addition of M rows of $\sqrt{\lambda} I_M$. Also it follows $\Phi y$ would result in $\Phi' y$ as there are M zeroes at the end and the matrix multiplication would result in 0. Therefore we can re-write eq (1) as:
+\begin{equation*}
+\omega_\text{LS} =  (\lambda I_M + \Phi'^T \Phi')^\text{-1} \Phi'^T y 
+\end{equation*}
+Hence proved.
+
+\section{Problem 4}
+We know that,
+\begin{equation}
+P(\omega,\beta|D) \propto P(y|\Phi, \beta,\omega).P(\beta,\omega)
+\end{equation}
+and
+\begin{equation*}
+P(\omega,\beta) = N(\omega|m_o,\beta^\text{-1}S_o)Gamma(\beta|a_o,b_o)
+\end{equation*}
+\begin{equation*}
+P(y|\Phi, \beta,\omega) = \prod_{i=1}^{N}{N(y_i|\omega^T \Phi(x_i) , \beta^\text{-1})}
+\end{equation*}
+Substituting these in equation (2) we get,
+\begin{equation}
+P(\omega,\beta|D) \propto \beta^\text{$(a_o - 1 + N/2)$} exp\Big(\frac{\substack{-\beta}}{\substack{2}}A - b_o\beta \Big)
+\end{equation}
+\begin{equation*}
+\text{where A is given by } A = (m_o - \omega)^T S_o^\text{-1}(m_o -w) + (\Phi\omega -y)^T(\Phi\omega -y)
+\end{equation*}
+\begin{equation}
+ A =  \omega^T S_o^\text{-1} \omega + \omega^T \Phi^T \Phi \omega -2\omega^T S_o^\text{-1} m_o  - 2\omega^T \Phi y + y^T y + m_o^T S_o^\text{-1} m_o
+\end{equation}
+Considering only the $\omega$ terms first, we add and subtract the term: $m_N^T S_N^\text{-1} m_N$
+\begin{equation*}
+ A =  \omega^T (S_o^\text{-1} + \Phi^T \Phi) \omega -2\omega^T (S_o^\text{-1} m_o  -  \Phi y) + m_N^T S_N^\text{-1} m_N - m_N^T S_N^\text{-1} m_N
+\end{equation*}
+from this we can find the $m_N$ and $S_N$ terms:
+\begin{equation*}
+S_N^\text{-1} = (S_o^\text{-1} + \Phi^T \Phi) \text{  and  } m_N = S_N (S_o^\text{-1} m_o  -  \Phi y)
+\end{equation*}
+From equations (3) and (4) we have:
+\begin{equation*}
+a_N = a_o + N/2 \text{  and  } b_N = b_o + \frac{\substack{1}}{\substack{2}} (y^T y + m_o^T S_o^\text{-1} m_o - m_N^T S_N^\text{-1} m_N )
+\end{equation*}
+Hence the posterior is of the form,
+\begin{equation*}
+P(\omega,\beta|D) = N(\omega|m_N,\beta^\text{-1}S_N)Gamma(\beta|a_N,b_N)
+\end{equation*}
+\end{document}

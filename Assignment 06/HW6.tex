@@ -1,0 +1,88 @@
+\documentclass[10pt, a4paper, fleqn]{article}
+\usepackage[left=0.5in, top=0.5in, bottom=0.5in, right=0.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{setspace}
+
+\begin{document}
+\title{Machine Learning: Assignment 6\\
+Harshita Agarwala}
+\maketitle
+\begin{singlespacing}
+\section{Problem 1}
+i)\\
+Now we know that x is both concave and convex. Therefore 3x would also be convex. Similarly $e^\text{y+z}$ is also convex. We can convert the minimum function to a maximum by using max(x) = -min(-x). Hence $-min(-x^2, \log(y))$ becomes $max(x^2, -\log(y))$ which is concave. Therefore f(x,y,z) is concave.\\ \\
+ii)\\
+We find the Hessian matrix for the given function. The required partial derivatives are:
+\begin{equation}
+\frac{{\partial f^2}}{{\partial x^2}} = 6yx - 4y \ \ \
+\frac{{\partial f^2}}{{\partial x \partial y}} = 3 x^2 - 4 x\ \ \ 
+\frac{{\partial f^2}}{{\partial y^2}} = 0 \ \ \ 
+\frac{{\partial f^2}}{{\partial y \partial x}} = 3 x^2 - 4 x
+\end{equation}
+Substituting these values in the Hessian matrix H, we get:
+\[\begin{bmatrix}
+6yx - 4y&3 x^2 - 4 x\\
+3 x^2 - 4 x&0
+\end{bmatrix}\]
+Now for H to be positive semidefinite, $\forall$ w $\in \mathbb{R}^2$ the product $wHw^T \geq 0$ . Let the vector be [1, 1]. Then $wHw^T$ is:
+\begin{equation*}
+6yx - 4y + 2(3 x^2 - 4 x)
+\end{equation*}
+As x,y $\in (-10,10)$, we pick any value of x, y and show that the product is $<$ 0. \\
+On taking, x=8 and y=-9 we get, the product to be -76. Hence the Hessian matrix is not positive semidefinite. Therefore the f(x,y) is not convex.\\ \\
+iii)\\
+We find the second order derivative of the function.
+\begin{equation*}
+f(x) = \log{x} + x^3 \ \ 
+f'(x) = \frac{1}{x} + 3 x^2 \ \ 
+f''(x) = - \frac{1}{x^2} + 6 x \ \  
+\end{equation*}
+Now as the domain of the function is $(1,\infty)$ we have $- \frac{1}{\substack{x^2}} < 6x$ . Therefore as $f''(x) \geq 0$ the function is convex.\\ \\
+iv)\\
+We again convert the minimum function to a maximum one. f(x) is then equivalent to $max(-2\log{2x}, x^2 - 4x + 32)$ \\ 
+Now, $2x$ is convex as x is convex(also concave). Also, as logarithmic function is concave, hence $-2 * \log{2x}$ is convex.
+Similarly, $-4 * x$ is convex and $x^2$ and the constant 32 are also convex. Therefore $x^2 - 4x + 32$ is convex.
+\\Hence, f(x) is convex
+\section{Problem 2}
+Let $f_1(x)$ and $f_2(x)$ be convex functions. Then, by the definition of convexity we have,
+\begin{equation}
+\lambda f_1(x) + (1-\lambda)f_1(y) \geq f_1(\lambda x + (1-\lambda)y) \ \ \forall \ \ \lambda \in [0,1]
+\end{equation}
+\begin{equation}
+\lambda f_2(x) + (1-\lambda)f_2(y) \geq f_2(\lambda x + (1-\lambda)y) \ \ \forall \ \ \lambda \in [0,1]
+\end{equation}
+Let $\lambda$ in equation (2) and (3) be the same, then on adding the two equations we get,
+\begin{equation*}
+\lambda (f_1(x) + f_2(x)) + (1-\lambda)(f_1(y) + f_2(y)) \geq  f_1(\lambda x + (1-\lambda)y) +  f_2(\lambda x + (1-\lambda)y) \ \ for \ \ \lambda \in [0,1]
+\end{equation*}
+\begin{equation*}
+\Rightarrow \lambda h(x) + (1-\lambda)h(y) \geq  h(\lambda x + (1-\lambda)y)  \ \ for \ \ \lambda \in [0,1]
+\end{equation*}
+As $\lambda \in$ [0,1] is arbitrary, therefore the result holds for all $\lambda \in$ [0,1]. Hence h is also a convex function. i.e. sum of two convex functions is also convex.
+\section{Problem 3}
+We will disprove the given function using an example. \\
+Let $f_1(x) = x$ and $f_2(x) = x^2$. Then the product, $g(x) = f_1(x).f_2(x) = x^3$ . Now we know that $x$ is a function that is convex and $x^2$ is also a convex function. However, $x^3$ is not a convex function. 
+\\Therefore the product of two convex functions is not necessarily a convex function. 
+\section{Problem 4}
+Let $\theta^*$ be a local minimum and $\beta$ be the global minimum such that, $f(\beta) < f(\theta^*)$ and $\beta \neq \theta^*$. \\We will show via contradiction that $f(\beta) = f(\theta^*)$ and $\beta = \theta^*$. Now we already know that
+\begin{equation}
+f(\beta) < f(\theta^*)
+\end{equation}
+From the definition of convexity, we have 
+\begin{equation}
+\lambda f(\beta) + (1-\lambda)f(\theta^*) \geq f(\lambda \beta + (1-\lambda)\theta^*) \ \ \forall \ \ \lambda \in [0,1]
+\end{equation}
+As $\theta^*$ is the local minimum and the value $ f(\lambda \beta + (1-\lambda)\theta^*)$ is in the neighborhood of $f(\theta^*)$, \\therefore $ f(\lambda \beta + (1-\lambda)\theta^*) > f(\theta^*)$ .  Hence equation (5) becomes, 
+\begin{equation*}
+\lambda f(\beta) + (1-\lambda)f(\theta^*) > f(\theta^*)
+\ \ 
+\Rightarrow \lambda f(\beta) > \lambda f(\theta^*)
+\end{equation*}
+As $\lambda \geq 0$, therefore we have
+\begin{equation}
+f(\beta) > f(\theta^*)
+\end{equation}
+From equation (4) and (6), we come to a contradiction, hence $f(\beta) = f(\theta^*)$ and $\beta = \theta^*$ i.e a convex function has no local minimum, only a global minimum.
+\end{singlespacing}
+\end{document}

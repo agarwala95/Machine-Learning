@@ -1,0 +1,30 @@
+\documentclass{article}
+\begin{document}
+\title{Machine Learning: Assignment 10\\
+Harshita Agarwala}
+\maketitle
+\begin{flushleft}
+Solution1: Assuming that the result holds for M dimensionality. The M+1 Dimensional subspace is governed by M principle eigen vectors and additional M+1 eigen vector that needs to be orthogonal to the previous $(u_{1},u_{2}...u_{m})$. We apply lagrangian multiplier to contrain this. We know that by variance formula, that variance for M+1 = $u_{M+1}^{T}Su_{M+1}$
+Applying lagrangian multiplier, we get the following function to maximise:
+$u_{M+1}^{T}Su_{M+1}+ \lambda_{M+1}(1-u_{M+1}^{T}u_{M+1}) \Sigma\eta u_{i}u_{M+1}$ \linebreak
+Taking a derivative of above function wrt $u_{M+1}$ we get:\linebreak
+$2Su_{M+1} -2\lambda_{M+1}u_{M+1} +\Sigma_{i=1}^{M}\eta_{i} u_{i}$ \linebreak
+Simplifying this by multiplying by $u_{j}^{T}$ on both sides, we see that $\eta$=0 for j between 1,..M. Therefore, we obtain:\linebreak
+$Su_{M+1}=\lambda_{M+1}u_{M+1}$ \linebreak
+Clearly, $u_{M+1}$ is an eigen vector of S with eigen value $\lambda_{M+1}$. Thus the variance is maximised by selecting eigen vector $u_{M+1}$ with largest eigen value $\lambda_{M+1}$. \linebreak
+
+Solution2:
+The log-likelihood function is given by:\linebreak
+$L(\mu,W,\Phi)=\frac{-ND}{2}ln(2\pi) -\frac{N}{2}ln|WW^{T} + \Phi| - \frac{1}{2}\Sigma_{n=1}^{N}{(x_{n}-\mu)^{T}(WW^{T}+\Phi)^{-1}(x_{n}-\mu)}$ \linebreak
+Now the log likelihood function for the transformed data can be given as: \linebreak
+$L_{A}(\mu,W,\Phi)=-\frac{ND}{2}ln(2\pi)-\frac{N}{2}ln|WW^{T}+\Phi|-\frac{1}{2}\Sigma_{n=1}^{N}{(Ax_{n}-\mu)^{T}(WW^{T}+\Phi)^{-1}(Ax_{n}-\mu)}$\linebreak
+Solving for $\mu$: \linebreak
+$\mu_{A}=\frac{1}{N}\Sigma_{n=1}^{N}Ax_{n}=Ax'=A\mu$ \linebreak
+Substituting this back in the log-likelihood function and also the values for $\Phi_{A}$ and $W_{A}$,we get:\linebreak
+$L_{A}(\mu_{A},W_{A},\Phi_{A})=-\frac{ND}{2}ln(2\pi) -\frac{N}{2}ln|W_{A}W_{A}^{T}+\Phi_{A}|-\frac{1}{2}\Sigma_{n=1}^{N}{(x_{n}-\mu_{A})^{T}(W_{A}W_{A}^{T}+\Phi_{A})^{-1}(x_{n}-\mu_{A})}-Nln|A|$\linebreak
+This looks exactly like the log-likelihood function except for the last term.\linebreak
+Solution3:
+We can map Leslie's choices [0,3,0,0,4] into concept space by multiplying it by the 5x5 V matrix, getting the form [1.74,2.84]. Multiplying this by $V^{T}$, we get [1.0092,1.0092,1.0092,2.0164,2.0164] which is useful to gauge how Leslie likes the other movies. \linebreak
+ \end{flushleft}
+\end{document}
+
